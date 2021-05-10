@@ -24,6 +24,9 @@ class AccountVerification extends Migration
 				'type'       		=> 'VARCHAR',
 				'constraint' 		=> 256,
 			],
+			'expires_at' => [
+				'type' 				=> 'DATETIME',
+			],
 			'created_at' => [
 				'type' 				=> 'DATETIME',
 			],

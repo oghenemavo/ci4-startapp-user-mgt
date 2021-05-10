@@ -28,7 +28,7 @@ class AuthBaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = [];
+	protected $helpers = ['form', 'text', 'url'];
 
 	/**
 	 * Constructor.
@@ -45,7 +45,12 @@ class AuthBaseController extends Controller
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
-		// E.g.: $this->session = Services::session();
+		$this->session = Services::session();
+		$this->validation = Services::validation();
+
+		// custom libraries
+		$this->signupLib = Services::signupLib();
+		$this->accountLib = Services::accountLib();
 	}
 
 	/**

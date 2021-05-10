@@ -11,16 +11,17 @@ class AccountVerification extends Model
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
-	protected $returnType           = 'array';
+	protected $returnType           = 'object';
 	protected $useSoftDelete        = false;
 	protected $protectFields        = true;
 	protected $allowedFields        = [
 		'user_id',
 		'account_token',
+		'expires_at',
 	];
 
 	// Dates
-	protected $useTimestamps        = false;
+	protected $useTimestamps        = true;
 	protected $dateFormat           = 'datetime';
 	protected $createdField         = 'created_at';
 	protected $updatedField         = 'updated_at';

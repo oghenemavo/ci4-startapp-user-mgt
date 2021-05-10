@@ -11,7 +11,7 @@ class User extends Model
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
-	protected $returnType           = 'array';
+	protected $returnType           = 'object';
 	protected $useSoftDelete        = false;
 	protected $protectFields        = true;
 	protected $allowedFields        = [
@@ -41,12 +41,19 @@ class User extends Model
 
 	// Callbacks
 	protected $allowCallbacks       = true;
-	protected $beforeInsert         = [];
-	protected $afterInsert          = [];
+	protected $beforeInsert         = ['hashPassword'];
+	protected $afterInsert          = ['hashPassword'];
 	protected $beforeUpdate         = [];
 	protected $afterUpdate          = [];
 	protected $beforeFind           = [];
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
+
+	protected function hashPassword(array $data) {
+        if (isset($data['data']['user_password'])) { // check if the password key is set
+            $data['data']['user_password'] = password_hash($data['data']['user_password'], PASSWORD_DEFAULT); // hash password
+        }
+        return $data;
+    }
 }
