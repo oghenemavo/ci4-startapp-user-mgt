@@ -21,6 +21,11 @@ class Signup extends AuthBaseController
 		echo view($this->_setPagePath($this->viewPath, 'signup'), $data);
 	}
 
+	/**
+	 * Process user signup details
+	 *
+	 * @return void
+	 */
 	public function process()
 	{
 		// create validation rules

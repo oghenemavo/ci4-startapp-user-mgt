@@ -3,10 +3,24 @@
 namespace Ecosystem\Authentication\Config;
 
 use CodeIgniter\Config\BaseService;
-use Ecosystem\Authentication\Libraries\{SignupLib, AccountVerificationLib, MailerLib, CIMailerLib};
+use Ecosystem\Authentication\Libraries\{SignupLib, UserLib, RoleLib, AccountVerificationLib, MailerLib, CIMailerLib};
 
 class Services extends BaseService
 {
+	public static function roleLib($getShared = true) {
+        if ($getShared) {
+            return static::getSharedInstance('roleLib');
+        }
+        return new RoleLib();
+    }
+
+	public static function userLib($getShared = true) {
+        if ($getShared) {
+            return static::getSharedInstance('userLib');
+        }
+        return new UserLib(\Config\Services::request());
+    }
+
 	public static function accountLib($getShared = true) {
         if ($getShared) {
             return static::getSharedInstance('accountLib');

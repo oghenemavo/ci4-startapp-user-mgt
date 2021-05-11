@@ -9,16 +9,11 @@ $routes->group(
     'signup', 
     [
         'namespace' => 'Ecosystem\Authentication\Controllers', 
-        // 'filter' => 'redirect_auth_user'
+        'filter' => 'redirect_auth_user'
     ], 
     function($routes) {
-        // Custom Placeholders
-        // $routes->addPlaceholder('htkn', '[\da-f]+');
-
         $routes->get('/', 'Signup::index');
         $routes->post('process', 'Signup::process');
-        // $routes->match(['get', 'post'], 'process', 'Signup::process');
-        // $routes->get('success', 'Signup::success');
 
     }
 );
@@ -32,7 +27,7 @@ $routes->group(
     'account', 
     [
         'namespace' => 'Ecosystem\Authentication\Controllers', 
-        // 'filter' => 'redirect_auth_user'
+        'filter' => 'redirect_auth_user'
     ], 
     function($routes) {
         // Custom Placeholders
@@ -65,3 +60,10 @@ $routes->group(
         
     }
 );
+
+$routes->add('logout', '\Ecosystem\Authentication\Controllers\Login::logout');
+
+$routes->add('dashboard', function()
+{
+    echo 'welcome';
+}, ['filter' => 'require_auth_user']);

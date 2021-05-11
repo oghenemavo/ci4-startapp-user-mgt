@@ -11,7 +11,7 @@ class Role extends Model
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
-	protected $returnType           = 'array';
+	protected $returnType           = 'object';
 	protected $useSoftDelete        = false;
 	protected $protectFields        = true;
 	protected $allowedFields        = [
@@ -43,4 +43,15 @@ class Role extends Model
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
+
+	
+	/**
+	 * Check if role is active
+	 *
+	 * @param integer $role_id		column (id)
+	 * @return boolean
+	 */
+    public function isRoleActive(int $role_id):bool {
+        return (bool) $this->where('id', $role_id)->where('is_active', '1')->countAll();
+    }
 }

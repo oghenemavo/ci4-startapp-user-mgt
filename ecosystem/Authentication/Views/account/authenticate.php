@@ -1,4 +1,7 @@
-<h4>Provide code sent to your Email</h4>
+<?= $this->extend('Ecosystem\Authentication\Views\layouts\app') ?>
+
+<?= $this->section('content') ?>
+    <h4>Provide code sent to your Email</h4>
 
     <?php
         // Open form
@@ -22,8 +25,6 @@
         <div class="text-center" style="font-size: 15px;">
             Didn't get an activation code? &nbsp;<a href="<?= route_to('resend_verification', $verification); ?>" id="resend" style="color:#7F6610;font-weight:lighter;">Resend</a>
         </div>
+    </form>
 
-    <?php
-        // Close form
-        echo form_close();
-    ?>
+<?= $this->endSection() ?>

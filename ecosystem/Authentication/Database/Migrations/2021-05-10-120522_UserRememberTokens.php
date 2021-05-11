@@ -24,6 +24,12 @@ class UserRememberTokens extends Migration
 				'type'       		=> 'VARCHAR',
 				'constraint' 		=> 256,
 			],
+			'user_agent' => [
+				'type'       		=> 'TEXT',
+			],
+			'expires_at' => [
+				'type' 				=> 'DATETIME',
+			],
 			'created_at' => [
 				'type' 				=> 'DATETIME',
 			],

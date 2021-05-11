@@ -12,6 +12,7 @@
             <input type="text" class="form-control" name="firstname" id="firstname" value="<?= set_value('firstname') ?>" placeholder="FIRST NAME" autofocus>
             <?= $validation->showError('firstname'); ?>
         </div>
+        
         <div class="form-group">
             <label for="lastname">LAST NAME</label>
             <input type="text" class="form-control" name="lastname" id="lastname" value="<?= set_value('lastname') ?>" placeholder="LAST NAME">

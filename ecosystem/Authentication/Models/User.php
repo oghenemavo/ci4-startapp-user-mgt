@@ -56,4 +56,23 @@ class User extends Model
         }
         return $data;
     }
+
+	/**
+	 * Fetch a user record
+	 *
+	 * @param integer $id		user id
+	 * @return void
+	 */
+	public function fetchUserById(int $id) {
+        $this->select('users.*');
+        $this->select('t2.*');
+        $this->select('t3.role_id');
+        $this->select('t4.role');
+
+        $this->join('user_profile t2', 'users.id = t2.user_id');
+        $this->join('user_role t3', 'users.id = t3.user_id');
+        $this->join('roles t4', 't3.role_id = t4.id');
+        return $this->where('users.id', $id)->first();
+    }
+	
 }

@@ -11,7 +11,7 @@ class UserRole extends Model
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
-	protected $returnType           = 'array';
+	protected $returnType           = 'object';
 	protected $useSoftDelete        = false;
 	protected $protectFields        = true;
 	protected $allowedFields        = [
@@ -42,4 +42,12 @@ class UserRole extends Model
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
+
+	public function fetchRoleInfo($user_id) {
+        $this->select('user_role.role_id');
+        $this->select('t2.role');
+
+        $this->join('roles t2', 'user_role.role_id = t2.id');
+        return $this->where('user_role.user_id', $user_id)->first();
+    }
 }

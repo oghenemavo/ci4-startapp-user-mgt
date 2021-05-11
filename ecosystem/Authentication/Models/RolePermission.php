@@ -11,7 +11,7 @@ class RolePermission extends Model
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
-	protected $returnType           = 'array';
+	protected $returnType           = 'object';
 	protected $useSoftDelete        = false;
 	protected $protectFields        = true;
 	protected $allowedFields        = [
@@ -43,4 +43,13 @@ class RolePermission extends Model
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
+
+	public function fetchRolePermissionsInfo($role_id):array
+    {
+        $this->select('t2.permission, t2.permission_slug');
+        $this->join('permissions t2', 'role_permissions.permission_id = t2.id');
+        $this->where('role_permissions.role_id', $role_id);
+        return $this->where('role_permissions.is_active', '1')->get()->getResultObject(); // permission is active
+    }
+	
 }

@@ -6,6 +6,9 @@ use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
+use Ecosystem\Authentication\Filters\AuthorizedUser;
+use Ecosystem\Authentication\Filters\RedirectOnAuth;
+use Ecosystem\Authentication\Filters\RequireUserAuthorization;
 
 class Filters extends BaseConfig
 {
@@ -19,6 +22,9 @@ class Filters extends BaseConfig
 		'csrf'     => CSRF::class,
 		'toolbar'  => DebugToolbar::class,
 		'honeypot' => Honeypot::class,
+		'redirect_auth_user' => RedirectOnAuth::class,
+		'auth_user' => AuthorizedUser::class,
+		'require_auth_user' => RequireUserAuthorization::class,
 	];
 
 	/**
@@ -31,6 +37,7 @@ class Filters extends BaseConfig
 		'before' => [
 			// 'honeypot',
 			// 'csrf',
+			'auth_user',
 		],
 		'after'  => [
 			'toolbar',
