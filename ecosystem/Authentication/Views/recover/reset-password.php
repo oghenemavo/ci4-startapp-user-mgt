@@ -9,7 +9,7 @@
         <?php
             // Open form
             $attributes = ['id' => 'reset-passsword'];
-            echo form_open(route_to('reset', $token), $attributes);
+            echo form_open(route_to('reset_password', $token), $attributes);
         ?>
 
             <div class="form-group mg-b-20">

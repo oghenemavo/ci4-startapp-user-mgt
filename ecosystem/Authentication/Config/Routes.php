@@ -76,13 +76,13 @@ $routes->group(
 
         $routes->group('recover', function($routes) {
             $routes->get('forgot-password', 'RecoverAccount::index');
-            $routes->post('forgot-password/process', 'RecoverAccount::forgotPasswordProcess');
+            $routes->post('forgot-password/process', 'RecoverAccount::forgotPasswordProcess', ['as' => 'recover_password']);
         });
 
         // Reset Pssword
         $routes->group('reset', function($routes) {
             $routes->get('password/(:token)', 'RecoverAccount::process/$1');
-            $routes->post('password/process/(:token)', 'RecoverAccount::resetPassword/$1', ['as' => 'reset']);
+            $routes->post('password/process/(:token)', 'RecoverAccount::resetPassword/$1', ['as' => 'reset_password']);
         });
     }
 );

@@ -6,7 +6,7 @@
     <?php
         // Open form
         $attributes = ['id' => 'forgot-password', 'autocomplete' => 'off'];
-        echo form_open('recover/forgot-password/process', $attributes);
+        echo form_open(route_to('recover_password'), $attributes);
     ?>
 
         <div class="form-group">
