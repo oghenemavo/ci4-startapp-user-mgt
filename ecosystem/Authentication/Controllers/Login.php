@@ -28,6 +28,11 @@ class Login extends AuthBaseController
         echo view($this->_setPagePath($this->viewPath, 'login'), $data);
 	}
 
+	/**
+	 * Process a user login
+	 *
+	 * @return void
+	 */
 	public function process()
 	{
 		// create validation rules

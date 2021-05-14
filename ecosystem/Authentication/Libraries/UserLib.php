@@ -19,11 +19,23 @@ class UserLib
         $this->request = $request;
     }
 
-    public function get_by_email($email) {
+    /**
+     * Get a user by email
+     *
+     * @param string $email
+     * @return void
+     */
+    public function get_by_email(string $email) {
         $user = new User();
         return $user->where('user_email', $email)->first();
     }
 
+    /**
+     * Get a user by id
+     *
+     * @param integer $id
+     * @return void
+     */
     public function get_user_by_id($id) {
         $user = new User();
         return $user->fetchUserById($id);

@@ -16,6 +16,13 @@ class LoginLib
         $this->request = $request;
     }
 
+    /**
+     * Authenticate a user by email and password
+     *
+     * @param array $user_data              Email address, Password
+     * @param boolean $remember
+     * @return array
+     */
     public function authenticate_user(array $user_data, bool $remember) {
         $operation = $this->check_user($user_data['email'], $user_data['password']);
         [$user, $result] = $operation; // destructing PHP v7.1
@@ -30,6 +37,11 @@ class LoginLib
         return $result;
     }
 
+    /**
+     * Log the user in from the remember me cookie
+     *
+     * @return void
+     */
     public function login_from_cookie() {
         helper('encryption');
 
@@ -55,17 +67,20 @@ class LoginLib
                     $roleLib = Services::roleLib();
                     $role_info = $roleLib->set_user_role($user->id);
                     if ($role_info) {
-                        // $user->role = array_key_first($role_info); // set role to user
                         $this->set_user_session($user);
                         return $user;
                     }
                 }
             }
         }
-        $result['error'] = "Can\'t sign in currently, please contact support";
         return false;
     }
 
+    /**
+     * Logout a user
+     *
+     * @return void
+     */
     public function logout() {
         helper('encryption');       
 
@@ -87,6 +102,13 @@ class LoginLib
         return true;
     }
 
+    /**
+     * Check the user credentials
+     *
+     * @param string $email
+     * @param string $password
+     * @return array
+     */
     protected function check_user (string $email, string $password):array {
         $userLib = Services::userLib();
         $roleLib = Services::roleLib();
@@ -137,6 +159,12 @@ class LoginLib
         return true;
     }
 
+    /**
+     * Save user Log in cookie and database
+     *
+     * @param integer $user_id
+     * @return boolean
+     */
     protected function create_remember_environment($user_id) {
         helper('encryption');
 
@@ -165,6 +193,7 @@ class LoginLib
         }
 
         setcookie('remember_me', $encrypted_token, $expiry->timestamp, '/');
+        return true;
     }
     
 }

@@ -43,6 +43,12 @@ class UserRole extends Model
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
 
+	/**
+	 * Fetch a user role record by user id
+	 *
+	 * @param string $user_id
+	 * @return void
+	 */
 	public function fetchRoleInfo($user_id) {
         $this->select('user_role.role_id');
         $this->select('t2.role');

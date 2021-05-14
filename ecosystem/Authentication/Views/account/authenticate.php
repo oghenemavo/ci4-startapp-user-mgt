@@ -6,7 +6,7 @@
     <?php
         // Open form
         $attributes = ['id' => 'activate', 'autocomplete' => 'off'];
-        echo form_open(route_to('account-verify', $verification), $attributes);
+        echo form_open(route_to('account_verify', $verification), $attributes);
     ?>
         <div id="form-info" class="alert alert-danger mb-2 text-center" role="alert" style="display:none;">
         

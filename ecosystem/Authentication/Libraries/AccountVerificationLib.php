@@ -8,13 +8,25 @@ use Ecosystem\Authentication\Models\{User, AccountVerification};
 
 class AccountVerificationLib 
 {
-    public function verify_token($token) {
+    /**
+     * Verify a token
+     *
+     * @param string $token
+     * @return void
+     */
+    public function verify_token(string $token) {
         $verification = new AccountVerification();
         $verification->where('account_token', $token);
         return $verification->where('expires_at >=', Time::now()->toDateTimeString())->first();
     }
 
-    public function verify_user($user_data) {
+    /**
+     * Verify a user
+     *
+     * @param array $user_data
+     * @return void
+     */
+    public function verify_user(array $user_data) {
         helper('encryption'); // custom encryption helper function
         
         $activation_token = hash_data($user_data['code']); // goes to the database 
@@ -40,10 +52,8 @@ class AccountVerificationLib
     
             // Verification Table
             $verification = new AccountVerification();
-    
             try {
-                $verification->where('user_id', $account->id)
-                ->where('account_token', $user_data['account_token']);
+                $verification->where('user_id', $account->id)->where('account_token', $user_data['account_token']);
                 $verification->delete();
             } catch (\ReflectionException $e) {
             }
@@ -63,7 +73,13 @@ class AccountVerificationLib
         return $result;
     }
 
-    public function resend_verification($token) {
+    /**
+     * Resend a token verification
+     *
+     * @param string $token
+     * @return void
+     */
+    public function resend_verification(string $token) {
         helper('encryption'); // custom encryption helper function
         $result = [];
 

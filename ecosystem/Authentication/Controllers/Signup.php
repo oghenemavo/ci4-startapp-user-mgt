@@ -3,6 +3,7 @@
 namespace Ecosystem\Authentication\Controllers;
 
 use Ecosystem\Authentication\Controllers\AuthBaseController;
+use Ecosystem\Authentication\Libraries\SignupLib;
 
 class Signup extends AuthBaseController
 {
@@ -80,7 +81,8 @@ class Signup extends AuthBaseController
 				'user_password' => $this->request->getVar('password'),
 			];
 			
-			$result = $this->signupLib->create_user($data);
+			$signupLib = new SignupLib();
+			$result = $signupLib->create_user($data);
 			if ($this->request->isAJAX()) { // if request is ajax
 				return $this->response->setJSON($result); // $result['error'] or $result['success']
 			} else {

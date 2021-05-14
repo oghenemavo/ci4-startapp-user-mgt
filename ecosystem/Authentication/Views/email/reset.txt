@@ -1,0 +1,2 @@
+Use this link on the reset page, to reset your password
+{link}

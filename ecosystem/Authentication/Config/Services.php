@@ -3,10 +3,18 @@
 namespace Ecosystem\Authentication\Config;
 
 use CodeIgniter\Config\BaseService;
-use Ecosystem\Authentication\Libraries\{SignupLib, UserLib, RoleLib, AccountVerificationLib, MailerLib, CIMailerLib};
+use Ecosystem\Authentication\Libraries\{
+    UserLib, RoleLib, AccountVerificationLib, MailerLib, CIMailerLib
+};
 
 class Services extends BaseService
 {
+    /**
+     * Role Lib Service
+     *
+     * @param boolean $getShared
+     * @return void
+     */
 	public static function roleLib($getShared = true) {
         if ($getShared) {
             return static::getSharedInstance('roleLib');
@@ -14,6 +22,12 @@ class Services extends BaseService
         return new RoleLib();
     }
 
+    /**
+     * User Lib Service
+     *
+     * @param boolean $getShared
+     * @return void
+     */
 	public static function userLib($getShared = true) {
         if ($getShared) {
             return static::getSharedInstance('userLib');
@@ -21,6 +35,12 @@ class Services extends BaseService
         return new UserLib(\Config\Services::request());
     }
 
+    /**
+     * Account Verification Lib Service
+     *
+     * @param boolean $getShared
+     * @return void
+     */
 	public static function accountLib($getShared = true) {
         if ($getShared) {
             return static::getSharedInstance('accountLib');
@@ -28,15 +48,8 @@ class Services extends BaseService
         return new AccountVerificationLib();
     }
 
-	public static function signupLib($getShared = true) {
-        if ($getShared) {
-            return static::getSharedInstance('signupLib');
-        }
-        return new SignupLib();
-    }
-
     /**
-     * Mail Dispatch Library
+     * Mail Dispatch Lib Service
      *
      * @param boolean $getShared
      * @return void
@@ -49,7 +62,7 @@ class Services extends BaseService
     }
 
     /**
-     * CIMailer Library
+     * CIMailer Lib Service
      *
      * @param boolean $getShared
      * @return object Ecosystem\Authentication\Libraries\MailerLib 
