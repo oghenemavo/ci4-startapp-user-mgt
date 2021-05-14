@@ -38,6 +38,11 @@ class User extends AuthBaseController
         return redirect()->to('/')->with('error', 'profile not found');
     }
 
+	/**
+	 * Process Profile edit
+	 *
+	 * @return void
+	 */
 	public function editProfile()
 	{
 		// create validation rules

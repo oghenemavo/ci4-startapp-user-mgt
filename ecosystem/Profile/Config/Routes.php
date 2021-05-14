@@ -17,6 +17,12 @@ $routes->group(
             $routes->get('edit', 'User::profile');
             $routes->post('edit/process', 'User::editProfile', ['as' => 'user_edit_profile']);
         });
+
+		$routes->group('settings', function($routes) {
+            $routes->get('/', 'Settings::index');
+            $routes->post('email', 'Settings::editEmail', ['as' => 'change_email']);
+            $routes->post('password', 'Settings::editPassword', ['as' => 'change_password']);
+        });
         
     }
 );
