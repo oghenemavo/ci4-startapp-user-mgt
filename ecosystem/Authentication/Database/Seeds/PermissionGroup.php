@@ -12,6 +12,7 @@ class PermissionGroup extends Seeder
 			'0' => [
 				'id' 			=> 1,
 				'group_name' 	=> 'User',
+				'group_focus' 	=> 'user',
 				'group_slug' 	=> 'user',
 				'created_at'    => date('Y-m-d H:i:s'),
 				'updated_at'    => date('Y-m-d H:i:s'),
@@ -19,6 +20,7 @@ class PermissionGroup extends Seeder
 			'1' => [
 				'id' 			=> 2,
 				'group_name' 	=> 'Role',
+				'group_focus' 	=> 'role',
 				'group_slug' 	=> 'role',
 				'created_at'    => date('Y-m-d H:i:s'),
 				'updated_at'    => date('Y-m-d H:i:s'),

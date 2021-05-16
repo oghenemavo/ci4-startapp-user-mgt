@@ -14,14 +14,17 @@ class Roles extends Migration
 				'constraint'     	=> 11,
 				'unsigned'       	=> true,
 				'auto_increment' 	=> true,
+				'null' 				=> false,
 			],
 			'role' => [
 				'type'       		=> 'VARCHAR',
 				'constraint' 		=> 50,
+				'null' 				=> false,
 			],
 			'role_slug' => [
 				'type'       		=> 'VARCHAR',
 				'constraint' 		=> 100,
+				'null' 				=> false,
 			],
 			'is_active' => [
 				'type'       		=> 'ENUM',
@@ -30,6 +33,7 @@ class Roles extends Migration
 			],
 			'created_at' => [
 				'type' 				=> 'DATETIME',
+				'null' 				=> false,
 			],
 			'updated_at' => [
 				'type' 				=> 'DATETIME',

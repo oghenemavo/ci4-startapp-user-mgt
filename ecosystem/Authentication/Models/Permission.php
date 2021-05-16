@@ -11,7 +11,7 @@ class Permission extends Model
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
-	protected $returnType           = 'array';
+	protected $returnType           = 'object';
 	protected $useSoftDelete        = false;
 	protected $protectFields        = true;
 	protected $allowedFields        = [

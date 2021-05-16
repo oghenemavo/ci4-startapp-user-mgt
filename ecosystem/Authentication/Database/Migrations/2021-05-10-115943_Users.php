@@ -30,10 +30,12 @@ class Users extends Migration
 			'user_email' => [
 				'type'       		=> 'VARCHAR',
 				'constraint' 		=> 100,
+				'null' 				=> false,
 			],
 			'user_password' => [
 				'type'       		=> 'VARCHAR',
 				'constraint' 		=> 256,
+				'null' 				=> false,
 			],
 			'password_reset_token' => [
 				'type'       		=> 'VARCHAR',
@@ -56,6 +58,7 @@ class Users extends Migration
 			],
 			'created_at' => [
 				'type' 				=> 'DATETIME',
+				'null' 				=> false,
 			],
 			'updated_at' => [
 				'type' 				=> 'DATETIME',

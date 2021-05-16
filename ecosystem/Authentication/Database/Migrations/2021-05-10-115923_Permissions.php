@@ -14,22 +14,27 @@ class Permissions extends Migration
 				'constraint'     	=> 11,
 				'unsigned'       	=> true,
 				'auto_increment' 	=> true,
+				'null' 				=> false,
 			],
 			'perm_group_id' => [
 				'type' 				=> 'INT',
 				'constraint'     	=> 11,
 				'unsigned'       	=> true,
+				'null' 				=> false,
 			],
 			'permission' => [
 				'type'       		=> 'VARCHAR',
 				'constraint' 		=> 50,
+				'null' 				=> false,
 			],
 			'permission_slug' => [
 				'type'       		=> 'VARCHAR',
 				'constraint' 		=> 100,
+				'null' 				=> false,
 			],
 			'created_at' => [
 				'type' 				=> 'DATETIME',
+				'null' 				=> false,
 			],
 			'updated_at' => [
 				'type' 				=> 'DATETIME',

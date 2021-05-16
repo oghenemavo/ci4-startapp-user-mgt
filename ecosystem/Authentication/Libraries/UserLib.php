@@ -97,5 +97,32 @@ class UserLib
             return redirect()->to('/login');
         }
     }
+
+    /**
+     * Check if user privilege is sufficient
+     *
+     * @param mixed $privilege
+     * @return boolean
+     */
+    public function has_privilege(mixed $privilege) {
+        if ($this->auth_user) {
+            if (service('roleLib')->set_role($this->auth_user->id)) {
+                return service('roleLib')->has_permission($privilege);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Check if user privilege is sufficient to access a page
+     *
+     * @param mixed $privilege
+     * @return boolean
+     */
+    public function has_privilege_or_exception(mixed $privilege) {
+        if (! $this->has_privilege($privilege)) {
+            throw new \CodeIgniter\Router\Exceptions\RedirectException(403);
+        }
+    }
     
 }

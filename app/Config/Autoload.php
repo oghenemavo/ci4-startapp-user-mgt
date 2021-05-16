@@ -44,6 +44,7 @@ class Autoload extends AutoloadConfig
 		'Config'      				=> APPPATH . 'Config',
 		'Ecosystem\Authentication' 	=> ROOTPATH . 'ecosystem/Authentication',
 		'Ecosystem\Profile' 		=> ROOTPATH . 'ecosystem/Profile',
+		'Ecosystem\Management' 		=> ROOTPATH . 'ecosystem/Management',
 	];
 
 	/**

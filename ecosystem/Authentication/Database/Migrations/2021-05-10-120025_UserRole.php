@@ -14,19 +14,23 @@ class UserRole extends Migration
 				'constraint'     	=> 11,
 				'unsigned'       	=> true,
 				'auto_increment' 	=> true,
+				'null' 				=> false,
 			],
 			'user_id' => [
 				'type'       		=> 'INT',
 				'constraint' 		=> 11,
 				'unsigned'       	=> true,
+				'null' 				=> false,
 			],
 			'role_id' => [
 				'type'       		=> 'INT',
 				'constraint' 		=> 11,
 				'unsigned'       	=> true,
+				'null' 				=> false,
 			],
 			'created_at' => [
 				'type' 				=> 'DATETIME',
+				'null' 				=> false,
 			],
 			'updated_at' => [
 				'type' 				=> 'DATETIME',

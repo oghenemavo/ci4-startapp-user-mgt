@@ -14,11 +14,13 @@ class RolePermissions extends Migration
 				'constraint'     	=> 11,
 				'unsigned'       	=> true,
 				'auto_increment' 	=> true,
+				'null' 				=> false,
 			],
 			'role_id' => [
 				'type' 				=> 'INT',
 				'constraint'     	=> 11,
 				'unsigned'       	=> true,
+				'null' 				=> false,
 			],
 			'permission_id' => [
 				'type' 				=> 'INT',
@@ -32,6 +34,7 @@ class RolePermissions extends Migration
 			],
 			'created_at' => [
 				'type' 				=> 'DATETIME',
+				'null' 				=> false,
 			],
 			'updated_at' => [
 				'type' 				=> 'DATETIME',
