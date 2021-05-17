@@ -3,10 +3,17 @@
 namespace Ecosystem\Authentication\Libraries;
 
 use Config\Services;
+use Ecosystem\Authentication\Models\MailClient;
 
 class MailerLib {
 
-    protected $dispatcher = 'ci_mailer';
+    protected $dispatcher = 'app_mailer';
+    protected $client;
+
+    public function __construct()
+    {
+        $this->client = new MailClient();
+    }
 
     /**
      * Send a mail with with set dispatcher
@@ -24,7 +31,7 @@ class MailerLib {
         $html = $view['html'];
         $text = $view['text'];
 
-        $html_email = $parser->setData($view['data'])->render($html);
+        $html_email = $parser->setData($view['data'])->renderString($html);
         $text_email = $parser->setData($view['data'])->renderString($text);
 
         $data['html'] = $html_email;
@@ -48,15 +55,16 @@ class MailerLib {
      * @param array $attachment     attachment data
      * @return bool
      */
-    private function set_dispatcher($address, $data, $attachment) {
+    protected function set_dispatcher($address, $data, $attachment) 
+    {
         $dispatcher = $this->get_dispatcher() ?? $this->dispatcher;
         switch ($dispatcher) {
-            case 'swift_mailer':
-                $dispatch = '';
+            case 'mail_gun':
+                $dispatch = ''; // mail gun dispatcher method
                 break;
             
             default:
-                $dispatch = Services::ciMailerLib()->dispatch($address, $data, $attachment);
+                $dispatch = service('ciMailerLib')->dispatch($address, $data, $attachment);
                 break;
         }
         return $dispatch;
@@ -67,8 +75,9 @@ class MailerLib {
      *
      * @return void
      */
-    private function get_dispatcher() {
-        // db get mail send method 
-        return $this->dispatcher;
+    protected function get_dispatcher()
+    {
+        $current_client = $this->client->where('is_active', '1')->orderBy('updated_at', 'DESC')->first();
+        return $current_client ? $current_client->client_slug : $this->dispatcher;
     }
 }

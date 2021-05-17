@@ -128,30 +128,35 @@ class RecoverLib
      * @param array $data
      * @return void
      */
-    private function send_reset_mail(array $data)
+    protected function send_reset_mail(array $data)
     {
-        $view = [
-            'html' => '\Ecosystem\Authentication\Views\email\reset.php',
-            'text' => '\Ecosystem\Authentication\Views\email\reset.txt',
-        ];
+        $template = service('mailTemplateLib')->find_template('reset_password');
 
-        $link = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . '/reset/password/' . $data['token'];
+        if ($template) {
+            $view = [
+                'html' => $template->template_html,
+                'text' => $template->template_text,
+            ];
+    
+            $link = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . '/reset/password/' . $data['token'];
 
-        $view['data'] = [
-            'link' => $link,
-            'name' => $data['name'],
-        ];
-
-        $address = [
-            'from' => 'autodispatch@demo.com',
-            'from_name' => 'Auto Dispatch',
-            'to' => $data['user_email'],
-            'to_name' => $data['name'],
-        ];
-
-        $mail = [
-            'subject' => 'Recover your Account',
-        ];
-        return Services::mailerLib()->send_mail($view, $address, $mail);
+            $view['data'] = [
+                'link' => $link,
+                'name' => $data['name'],
+            ];
+    
+            $address = [
+                'from' => $template->mail_from ?? 'autodispatch@demo.com',
+                'from_name' => $template->from_name ?? 'Auto Dispatch',
+                'to' => $data['user_email'],
+                'to_name' => $data['name'],
+            ];
+    
+            $mail = [
+                'subject' => $template->subject ?? 'Recover your Account',
+            ];
+            return Services::mailerLib()->send_mail($view, $address, $mail);
+        }
+        return false;
     }
 }

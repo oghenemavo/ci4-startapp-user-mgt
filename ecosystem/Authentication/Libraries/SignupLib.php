@@ -88,27 +88,32 @@ class SignupLib
     }
 
     protected function send_activation_mail(array $data) {
-        $view = [
-            'html' => '\Ecosystem\Authentication\Views\email\activation.php',
-            'text' => '\Ecosystem\Authentication\Views\email\text\activation.txt',
-        ];
+        $template = service('mailTemplateLib')->find_template('sign_up');
 
-        $view['data'] = [
-            'token' => $data['token'],
-            'name' => $data['name'],
-        ];
-
-        $address = [
-            'from' => 'autodispatch@demo.com',
-            'from_name' => 'Auto Dispatch',
-            'to' => $data['user_email'],
-            'to_name' => $data['name'],
-        ];
-
-        $mail = [
-            'subject' => 'Confirm your Account',
-        ];
-        return Services::mailerLib()->send_mail($view, $address, $mail);
+        if ($template) {
+            $view = [
+                'html' => $template->template_html,
+                'text' => $template->template_text,
+            ];
+    
+            $view['data'] = [
+                'token' => $data['token'],
+                'name' => $data['name'],
+            ];
+    
+            $address = [
+                'from' => $template->mail_from ?? 'autodispatch@demo.com',
+                'from_name' => $template->from_name ?? 'Auto Dispatch',
+                'to' => $data['user_email'],
+                'to_name' => $data['name'],
+            ];
+    
+            $mail = [
+                'subject' => $template->subject ?? 'Confirm your Account',
+            ];
+            return Services::mailerLib()->send_mail($view, $address, $mail);
+        }
+        return false;
     }
 
 }

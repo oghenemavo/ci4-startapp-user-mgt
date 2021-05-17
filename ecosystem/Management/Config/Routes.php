@@ -42,5 +42,20 @@ $routes->group(
         $routes->post('update/user/(:num)', 'User::update/$1', ['as' => 'update_user']);
         $routes->get('new/user', 'User::new', ['as' => 'new_user']);
         $routes->post('create/user', 'User::create', ['as' => 'create_user']);
+
+		$routes->group('mail', function($routes) {
+            // menus for mail settings
+            $routes->get('clients', 'MailSettings::index');
+            $routes->post('set/client', 'MailSettings::setClient', ['as' => 'set_client']);
+			
+		});
+
+		$routes->group('templates', function($routes) {
+            // menus for mail settings
+            $routes->get('/', 'MailSettings::templates');
+            $routes->get('show/(:num)', 'MailSettings::showTemplate/$1', ['as' => 'show_mail_template']);
+            $routes->post('edit/(:num)', 'MailSettings::editTemplate/$1', ['as' => 'edit_mail_template']);
+
+		});
     }
 );

@@ -4,11 +4,25 @@ namespace Ecosystem\Authentication\Config;
 
 use CodeIgniter\Config\BaseService;
 use Ecosystem\Authentication\Libraries\{
-    UserLib, RoleLib, AccountVerificationLib, MailerLib, CIMailerLib
+    UserLib, RoleLib, AccountVerificationLib, MailerLib, CIMailerLib,
+    MailTemplateLib
 };
 
 class Services extends BaseService
 {
+    /**
+     * MailTemplateLib Service
+     *
+     * @param boolean $getShared
+     * @return void
+     */
+	public static function mailTemplateLib($getShared = true) {
+        if ($getShared) {
+            return static::getSharedInstance('mailTemplateLib');
+        }
+        return new MailTemplateLib();
+    }
+
     /**
      * Role Lib Service
      *

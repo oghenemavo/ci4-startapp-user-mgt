@@ -14,7 +14,8 @@ class AccountVerificationLib
      * @param string $token
      * @return void
      */
-    public function verify_token(string $token) {
+    public function verify_token(string $token) 
+    {
         $verification = new AccountVerification();
         $verification->where('account_token', $token);
         return $verification->where('expires_at >=', Time::now()->toDateTimeString())->first();
@@ -26,7 +27,8 @@ class AccountVerificationLib
      * @param array $user_data
      * @return void
      */
-    public function verify_user(array $user_data) {
+    public function verify_user(array $user_data) 
+    {
         helper('encryption'); // custom encryption helper function
         
         $activation_token = hash_data($user_data['code']); // goes to the database 
@@ -79,7 +81,8 @@ class AccountVerificationLib
      * @param string $token
      * @return void
      */
-    public function resend_verification(string $token) {
+    public function resend_verification(string $token) 
+    {
         helper('encryption'); // custom encryption helper function
         $result = [];
 
@@ -126,28 +129,34 @@ class AccountVerificationLib
         return $result;
     }
 
-    protected function send_activation_mail(array $data) {
-        $view = [
-            'html' => '\Ecosystem\Authentication\Views\email\activation.php',
-            'text' => '\Ecosystem\Authentication\Views\email\text\activation.txt',
-        ];
+    protected function send_activation_mail(array $data) 
+    {
+        $template = service('mailTemplateLib')->find_template('authentication');
 
-        $view['data'] = [
-            'token' => $data['token'],
-            'name' => $data['name'],
-        ];
-
-        $address = [
-            'from' => 'autodispatch@demo.com',
-            'from_name' => 'Auto Dispatch',
-            'to' => $data['user_email'],
-            'to_name' => $data['name'],
-        ];
-
-        $mail = [
-            'subject' => 'Confirm your Account',
-        ];
-        return Services::mailerLib()->send_mail($view, $address, $mail);
+        if ($template) {
+            $view = [
+                'html' => $template->template_html,
+                'text' => $template->template_text,
+            ];
+    
+            $view['data'] = [
+                'token' => $data['token'],
+                'name' => $data['name'],
+            ];
+    
+            $address = [
+                'from' => $template->mail_from ?? 'autodispatch@demo.com',
+                'from_name' => $template->from_name ?? 'Auto Dispatch',
+                'to' => $data['user_email'],
+                'to_name' => $data['name'],
+            ];
+    
+            $mail = [
+                'subject' => $template->subject ?? 'Authenticate your Account',
+            ];
+            return Services::mailerLib()->send_mail($view, $address, $mail);
+        }
+        return false;
     }
 
 }
