@@ -121,3 +121,15 @@
 #--------------------------------------------------------------------
 
 # logger.threshold = 4
+
+#--------------------------------------------------------------------
+# Email
+#--------------------------------------------------------------------
+email.protocol = 'smtp'
+email.SMTPHost = 'smtp.gmail.com'
+email.SMTPUser = ''
+email.SMTPPass = ''
+email.SMTPPort = 587
+email.SMTPCrypto = 'tls'
+email.mailType = 'html'
+email.validate = 'false'
