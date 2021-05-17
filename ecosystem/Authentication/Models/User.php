@@ -73,7 +73,7 @@ class User extends Model
         $this->select('users.*');
         $this->select('t2.*');
         $this->select('t3.role_id');
-        $this->select('t4.role');
+        $this->select('t4.role, t4.role_slug');
 
         $this->join('user_profile t2', 'users.id = t2.user_id');
         $this->join('user_role t3', 'users.id = t3.user_id');

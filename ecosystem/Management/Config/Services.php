@@ -3,7 +3,7 @@
 namespace Ecosystem\Management\Config;
 
 use CodeIgniter\Config\BaseService;
-use Ecosystem\Management\Libraries\PermissionsLib;
+use Ecosystem\Management\Libraries\{PermissionsLib, ManageLib};
 
 class Services extends BaseService
 {
@@ -18,5 +18,12 @@ class Services extends BaseService
             return static::getSharedInstance('permissionsLib');
         }
         return new PermissionsLib();
+    }
+
+	public static function manageLib($getShared = true) {
+        if ($getShared) {
+            return static::getSharedInstance('manageLib');
+        }
+        return new ManageLib();
     }
 }
